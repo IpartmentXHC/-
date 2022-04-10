@@ -1,0 +1,95 @@
+#include<iostream>
+using namespace std;
+typedef int datatype;
+typedef struct linknode
+{
+	datatype data;
+	struct linknode *next;
+}linklist;
+
+linklist *initlist()//初始化链表
+{
+	linklist *head;
+	head  = (linklist*)malloc(sizeof(linklist));
+	head->next=NULL;
+	return head;
+}
+
+void cratelistH (linklist *head,int n)//头插法 逆序
+{
+	linklist *s;
+	printf("请输入%d个整数",n);
+	for(int i=0;i<n;i++)
+	{
+		s=(linklist *)malloc(sizeof(linklist));
+		cin>>s->data;
+		s->next=head->next;
+		head->next=s;
+	}
+	cout<<"操作成功！";
+}
+void cratelistL(linklist *head,int n)//尾插法 正序
+{
+	linklist *s,*last;
+	last=head;
+	printf("请输入%d个整数",n);
+	for(int i=0;i<n;i++)
+	{
+		s=(linklist *)malloc(sizeof(linklist));
+		cin>>s->data;
+		s->next=NULL;
+		last->next=s;
+		last=s;
+	}
+	cout<<"操作成功！";
+}
+
+int lengthlist(linklist *head)//求表长
+{
+	linklist *p=head->next;
+	int i=0;
+	while(p!=NULL)
+	{
+		i++;
+		p=p->next;
+	}
+	return i;
+}
+
+
+void locate(linklist *head,datatype x)//按值查找
+{
+	int j=1;
+	linklist *p;
+	p=head->next;
+	while(p!=NULL&&p->data!=x)	//细微不同
+	{
+		j++;
+		p=p->next;
+	}
+	if(p!=NULL)
+		printf("在表的第%d位找到值为%d的结点",j,x);
+	else
+		cout<<"未找到值为"<<x<<"的结点";
+}
+void searchlist (linklist *head,int i)
+{
+	linklist *p;
+	int j=0;
+	p=head;
+	if(i>lengthlist(head)||i<0)
+		cout<<"位置错误";
+	while(j<i&&p->next!=NULL)
+	{
+		p=p->next;
+		j++;
+	}
+	if(j==i)
+		printf("在第%d位上的元素值为%d!",i,p->data);
+}
+int main()
+{
+	
+
+	return 0;
+}
